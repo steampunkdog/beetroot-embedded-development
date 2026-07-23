@@ -11,25 +11,43 @@ void setup() {
 }
 
 void loop() {
-    digitalWrite(RED_LED_OUT, HIGH);  // Вмикаємо червоний світлодіод
-    delay(400);                       // Чекаємо 100 мілісекунд
+    // Обидва світлодіоди увімкнено
+    digitalWrite(BLUE_LED_OUT, HIGH); 
+    digitalWrite(RED_LED_OUT, HIGH);  
+    delay(200);
 
-    digitalWrite(BLUE_LED_OUT, LOW);  // Вимикаємо синій світлодіод
-    digitalWrite(RED_LED_OUT, LOW);   // Вимикаємо червоний світлодіод
-    delay(200);                       // Чекаємо 100 мілісекунд
+    // Тільки червоний світлодіод увімкнено
+    digitalWrite(BLUE_LED_OUT, LOW);
+    digitalWrite(RED_LED_OUT, HIGH);
+    delay(400);
 
-    digitalWrite(RED_LED_OUT, HIGH);   // Вимикаємо червоний світлодіод
-    delay(400);                       // Чекаємо 100 мілісекунд
-
-    digitalWrite(BLUE_LED_OUT, HIGH); // Вмикаємо синій світлодіод
-    delay(400);                       // Чекаємо 200 мілісекунд
+    // Обидва світлодіоди вимкнено
+    digitalWrite(BLUE_LED_OUT, LOW);
+    digitalWrite(RED_LED_OUT, LOW);
+    delay(200);
     
-    digitalWrite(RED_LED_OUT, LOW);   // Вимикаємо червоний світлодіод
-    delay(400);                       // Чекаємо 200 мілісекунд
+    // Тільки червоний світлодіод увімкнено
+    digitalWrite(BLUE_LED_OUT, LOW);
+    digitalWrite(RED_LED_OUT, HIGH);
+    delay(400);
 
-    digitalWrite(BLUE_LED_OUT, LOW);  // Вимикаємо синій світлодіод
-    delay(200);                       // Чекаємо 100 мілісекунд
+    // Обидва світлодіоди увімкнено
+    digitalWrite(BLUE_LED_OUT, HIGH);
+    digitalWrite(RED_LED_OUT, HIGH);
+    delay(200);
 
-    digitalWrite(BLUE_LED_OUT, HIGH); // Вмикаємо синій світлодіод
-    delay(400);                       // Чекаємо 200 мілісекунд
+    // Тільки синій світлодіод увімкнено
+    digitalWrite(BLUE_LED_OUT, HIGH);
+    digitalWrite(RED_LED_OUT, LOW);
+    delay(400);
+    
+    // Обидва світлодіоди вимкнено
+    digitalWrite(BLUE_LED_OUT, LOW);
+    digitalWrite(RED_LED_OUT, LOW);
+    delay(200);
+
+    // Тільки синій світлодіод увімкнено
+    digitalWrite(BLUE_LED_OUT, HIGH);
+    digitalWrite(RED_LED_OUT, LOW);
+    delay(400);
 }
