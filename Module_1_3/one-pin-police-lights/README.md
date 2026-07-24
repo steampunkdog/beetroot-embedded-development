@@ -16,7 +16,7 @@
 
 ## Схема
 
-![Схема](/misc/scheme.png)
+![Схема](misc/scheme.png)
 
 ## Робота
 
