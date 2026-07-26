@@ -12,7 +12,8 @@
 #define EXTERNAL_BUTTON_PIN 17
 #define BOOT_BUTTON_PIN 0
 
-#define DEBOUNCE_DELAY 200000 // 200ms
+#define DEBOUNCE_DELAY 200 // 200ms
+#define CONTROLLER_SCAN_PERIOD 100 //100ms
 #define NUMBER_OF_SPEED_MODES 4
 
 const int blink_speeds[NUMBER_OF_SPEED_MODES] = {1000, 500, 250, 125};
@@ -33,51 +34,57 @@ TaskHandle_t simultaneous_blink_task = NULL;
 
 void IRAM_ATTR boot_button_isr(void *arg) {
     int now = esp_timer_get_time();
-    if (now - last_boot_triggered_time > DEBOUNCE_DELAY) {
+    if (now - last_boot_triggered_time > DEBOUNCE_DELAY*1000) {
         last_boot_triggered_time = now;
     }
 }
 
 void IRAM_ATTR external_button_isr(void *arg) {
     int now = esp_timer_get_time();
-    if (now - last_external_triggered_tIme > DEBOUNCE_DELAY) {
+    if (now - last_external_triggered_tIme > DEBOUNCE_DELAY*1000) {
         last_external_triggered_tIme = now;
     }
 }
 
 // runs each 100ms
-void controller() {
+void controller(void *pvParameters) {
     static int last_controller_run = 0;
     int now = esp_timer_get_time();
     int state = 0; 
 
-    // controller check sor button press registred in time period beetween
-    // last_controller_run and now
+    TickType_t last_wake_time;
+    const TickType_t task_period_ticks = pdMS_TO_TICKS(CONTROLLER_SCAN_PERIOD);
+    while (1) {
+        vTaskDelayUntil(&last_wake_time, task_period_ticks);
+        state = 0;    
+        // controller check sor button press registred in time period beetween
+        // last_controller_run and now
 
-    // button was pressed in sanned period set first bit
-    if (last_boot_triggered_time > last_controller_run && last_boot_triggered_time < now) {
-        state += (1 << 0);
-    }
+        // button was pressed in sanned period set first bit
+        if (last_boot_triggered_time > last_controller_run && last_boot_triggered_time < now) {
+            state += (1 << 0);
+        }
 
-    // button was pressed in sanned period set second bit
-    if (last_external_triggered_tIme > last_controller_run && last_external_triggered_tIme < now) {
-        state += (1 << 0);
-    }
+        // button was pressed in sanned period set second bit
+        if (last_external_triggered_tIme > last_controller_run && last_external_triggered_tIme < now) {
+            state += (1 << 0);
+        }
 
-    last_controller_run = now;
+        last_controller_run = now;
 
-    switch (state) {    
-        case 0: // if none were pressed - skip
-            break;
-        case 1: // if boot was predded - next speed
-            current_blink_speed_idx = (current_blink_speed_idx + 1) % NUMBER_OF_SPEED_MODES;
-        case 2: // if external was predded - previous speed
-            current_blink_speed_idx = current_blink_speed_idx - 1 >= 0 ? current_blink_speed_idx - 1 : NUMBER_OF_SPEED_MODES-1 ;
-        case 3: // if both buttons were pressed in scanned period - perform mode change
-            // we have only two modes so reverting value is enough
-            // 0001 || 1110 = 1111 => !1111 = 0000
-            // 0000 || 1110 = 1110 => !1110 = 0001
-            current_blink_mode = !(current_blink_mode || !1);
+        switch (state) {    
+            case 0: // if none were pressed - skip
+                break;
+            case 1: // if boot was predded - next speed
+                current_blink_speed_idx = (current_blink_speed_idx + 1) % NUMBER_OF_SPEED_MODES;
+            case 2: // if external was predded - previous speed
+                current_blink_speed_idx = current_blink_speed_idx - 1 >= 0 ? current_blink_speed_idx - 1 : NUMBER_OF_SPEED_MODES-1 ;
+            case 3: // if both buttons were pressed in scanned period - perform mode change
+                // we have only two modes so reverting value is enough
+                // 0001 || 1110 = 1111 => !1111 = 0000
+                // 0000 || 1110 = 1110 => !1110 = 0001
+                current_blink_mode = !(current_blink_mode || !1);
+        }
     }
 }
 
@@ -138,7 +145,7 @@ void gpio_init() {
     };
     gpio_config(&external_button_conf);
 
-    gpio_config_t boot_button_conf = {
+    gpio_config_t boot_button_conf = {  
         .intr_type = GPIO_INTR_NEGEDGE,
         .mode = GPIO_MODE_INPUT,
         .pin_bit_mask = 1 << BOOT_BUTTON_PIN
