@@ -30,7 +30,7 @@ volatile int last_boot_triggered_time = 0;
 volatile int last_external_triggered_tIme = 0;
 
 TaskHandle_t blink_task = NULL; 
-TaskHandle_t simultaneous_blink_task = NULL;
+TaskHandle_t input_controller_task = NULL;
 
 void IRAM_ATTR boot_button_isr(void *arg) {
     int now = esp_timer_get_time();
@@ -47,7 +47,7 @@ void IRAM_ATTR external_button_isr(void *arg) {
 }
 
 // runs each 100ms
-void controller(void *pvParameters) {
+void input_controller(void *pvParameters) {
     static int last_controller_run = 0;
     int now = esp_timer_get_time();
     int state = 0; 
@@ -77,27 +77,15 @@ void controller(void *pvParameters) {
                 break;
             case 1: // if boot was predded - next speed
                 current_blink_speed_idx = (current_blink_speed_idx + 1) % NUMBER_OF_SPEED_MODES;
+                break;
             case 2: // if external was predded - previous speed
                 current_blink_speed_idx = current_blink_speed_idx - 1 >= 0 ? current_blink_speed_idx - 1 : NUMBER_OF_SPEED_MODES-1 ;
+                break;
             case 3: // if both buttons were pressed in scanned period - perform mode change
                 // we have only two modes so reverting value is enough
                 // 0001 || 1110 = 1111 => !1111 = 0000
                 // 0000 || 1110 = 1110 => !1110 = 0001
                 current_blink_mode = !(current_blink_mode || !1);
-        }
-    }
-}
-
-void blink(void *pvParameters) {
-    while (1)
-    {
-        int delay = blink_speeds[current_blink_speed_idx];
-        switch (current_blink_mode) {
-            case SERIAL: 
-                serial_blink(delay);
-                break;
-            case SIMULTANEOUS:
-                simultaneous_blink(delay);
                 break;
         }
     }
@@ -123,6 +111,21 @@ void simultaneous_blink(int delay) {
     gpio_set_level(GREEN_LED_PIN, 0);
     gpio_set_level(RED_LED_PIN, 0);
     vTaskDelay(pdMS_TO_TICKS(delay));
+}
+
+void blink(void *pvParameters) {
+    while (1)
+    {
+        int delay = blink_speeds[current_blink_speed_idx];
+        switch (current_blink_mode) {
+            case SERIAL: 
+                serial_blink(delay);
+                break;
+            case SIMULTANEOUS:
+                simultaneous_blink(delay);
+                break;
+        }
+    }
 }
 
 void gpio_init() {
@@ -166,6 +169,16 @@ void gpio_init() {
         NULL,
         1,
         &blink_task,
+        1
+    );
+
+    xTaskCreatePinnedToCore(
+        input_controller,
+        "Input Controller",
+        2048,
+        NULL,
+        4,
+        &input_controller_task,
         1
     );
 }
