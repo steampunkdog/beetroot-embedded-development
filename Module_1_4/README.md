@@ -97,6 +97,7 @@ current_blink_speed_idx = current_blink_speed_idx - 1 >= 0 ? current_blink_speed
 * `3` *0011* - натиснуті обидві кнопки (перемикання режиму)
 
 ```c
+void input_controller(void *pvParameters) {
     static int last_controller_run = 0;
     int now = 0;
     int state = 0; //first bit - NEXT button, seconf bit - PREV button
@@ -121,6 +122,7 @@ current_blink_speed_idx = current_blink_speed_idx - 1 >= 0 ? current_blink_speed
 
         last_controller_run = now;
 
+        
         switch (state) {    
             case 0: // if none were pressed - skip
                 break;
@@ -138,6 +140,7 @@ current_blink_speed_idx = current_blink_speed_idx - 1 >= 0 ? current_blink_speed
                 break;
         }
     }
+}
 ```
 
 #### Логування
