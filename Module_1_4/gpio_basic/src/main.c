@@ -9,32 +9,38 @@
 
 #define RED_LED_PIN 15
 #define GREEN_LED_PIN 16
-#define EXTERNAL_BUTTON_PIN 17
-#define BOOT_BUTTON_PIN 0
+#define PREV_BUTTON_PIN 17 // EXTERNAL button 
+#define NEXT_BUTTON_PIN 0  // BOOT button
 
-#define DEBOUNCE_DELAY 200000 // 200ms
+#define DEBOUNCE_DELAY_MS 200
 
 typedef enum {
     NONE = 0,
-    SLOW = 1,
-    FAST = 2
+    SLOW = 1000,
+    FAST = 300
 } blink_mode;
 
 volatile blink_mode current_blink_mode = NONE;
 
-void IRAM_ATTR boot_button_isr(void *arg) {
+//Interruption function for BOOT button
+void IRAM_ATTR next_button_isr(void *arg) {
     static int lastTriggeredTime = 0;
     int now = esp_timer_get_time();
-    if (now - lastTriggeredTime > DEBOUNCE_DELAY) {
+    
+    // If time between last signal and now is bigger than debounce delay - register new click
+    if (now - lastTriggeredTime > DEBOUNCE_DELAY_MS * 1000) {
         lastTriggeredTime = now;
         current_blink_mode = SLOW;
     }
 }
 
-void IRAM_ATTR external_button_isr(void *arg) {
+//Interruption function for EXTERNAL button
+void IRAM_ATTR prev_button_isr(void *arg) {
     static int lastTriggeredTime = 0;
     int now = esp_timer_get_time();
-    if (now - lastTriggeredTime > DEBOUNCE_DELAY) {
+
+    // If time between last signal and now is bigger than debounce delay - register new click  
+    if (now - lastTriggeredTime > DEBOUNCE_DELAY_MS) {
         lastTriggeredTime = now;
         current_blink_mode = FAST;
     }
@@ -68,14 +74,16 @@ void gpio_init() {
     gpio_config_t external_button_conf = {
         .intr_type = GPIO_INTR_NEGEDGE,
         .mode = GPIO_MODE_INPUT,
-        .pin_bit_mask = 1 << EXTERNAL_BUTTON_PIN
+        .pin_bit_mask = 1 << PREV_BUTTON_PIN,
+        .pull_up_en = GPIO_PULLUP_DISABLE //External button has build-in pull-up resistor
     };
     gpio_config(&external_button_conf);
 
     gpio_config_t boot_button_conf = {
         .intr_type = GPIO_INTR_NEGEDGE,
         .mode = GPIO_MODE_INPUT,
-        .pin_bit_mask = 1 << BOOT_BUTTON_PIN
+        .pin_bit_mask = 1 << NEXT_BUTTON_PIN,
+        .pull_up_en = GPIO_PULLUP_ENABLE
     };
     gpio_config(&boot_button_conf);
 
@@ -83,24 +91,16 @@ void gpio_init() {
     gpio_install_isr_service(0);
 
     // Add ISR handler for buttons
-    gpio_isr_handler_add(BOOT_BUTTON_PIN, boot_button_isr, NULL);
-    gpio_isr_handler_add(EXTERNAL_BUTTON_PIN, external_button_isr, NULL);
+    gpio_isr_handler_add(NEXT_BUTTON_PIN, next_button_isr, NULL);
+    gpio_isr_handler_add(PREV_BUTTON_PIN, prev_button_isr, NULL);
 }
 
 void app_main() {
     gpio_init();
 
-    while (1)
-    {
-        switch (current_blink_mode) {
-            case SLOW:
-                blink(1000);
-                break;
-            case FAST:
-                blink(300);
-                break;
-            case NONE:
-                break;
+    while (1) {
+        if(current_blink_mode != NONE) {
+            blink(current_blink_mode);
         }
     }
 }
