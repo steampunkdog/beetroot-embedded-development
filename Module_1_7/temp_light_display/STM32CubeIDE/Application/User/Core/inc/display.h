@@ -9,6 +9,7 @@
 #ifndef APPLICATION_USER_CORE_INC_DISPLAY_H_
 #define APPLICATION_USER_CORE_INC_DISPLAY_H_
 
+uint8_t display_init(I2C_HandleTypeDef *hi2c_n);
 void draw_sensor_values(float* values);
 
 #endif /* APPLICATION_USER_CORE_INC_DISPLAY_H_ */

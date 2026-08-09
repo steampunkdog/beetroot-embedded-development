@@ -12,12 +12,24 @@ static void draw_divider();
 static void draw_temperature(float temp);
 static void draw_illumunance(float illum);
 static void clear_screen();
+static void update_screen();
+
+static I2C_HandleTypeDef *hi2c;
+
+uint8_t display_init(I2C_HandleTypeDef *hi2c_n) {
+	uint8_t status = ssd1306_Init(hi2c_n);
+	if (!status) {
+		hi2c = hi2c_n;
+	}
+	return status;
+}
 
 void draw_sensor_values(float* values) {
 	clear_screen();
 	draw_temperature(values[TEMPERATURE_IDX]);
 	draw_divider();
-	draw_illumunance(values[ILLUMUNANCE_IDX]);
+	draw_illumunance(values[ILLUMINANCE_IDX]);
+	update_screen();
 }
 
 static void draw_divider() {
@@ -55,4 +67,8 @@ static void draw_illumunance(float illum) {
 
 static void clear_screen() {
 	ssd1306_Fill(BACKGROUND_COLOR);
+}
+
+static void update_screen() {
+	ssd1306_UpdateScreen(hi2c);
 }

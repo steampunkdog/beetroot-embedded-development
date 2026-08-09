@@ -4,8 +4,12 @@
 #include <string.h>
 #include <stdarg.h>
 #include "main.h"
-#include "usbd_cdc_if.h"
 
+UART_HandleTypeDef *huart;
+
+void serial_init(UART_HandleTypeDef *huart_n) {
+	huart = huart_n;
+}
 
 void print_to_serial(const char * msg, ...) {
 	static uint8_t outputBuffer[100] = {0};
@@ -15,7 +19,8 @@ void print_to_serial(const char * msg, ...) {
 	vsnprintf(outputBuffer, 100, msg, args);
     va_end(args);
 
-    CDC_Transmit_FS(outputBuffer, strlen(outputBuffer));
+    //CDC_Transmit_FS(outputBuffer, strlen(outputBuffer));
+    HAL_UART_Transmit(huart, (uint8_t *)outputBuffer, strlen(outputBuffer), HAL_MAX_DELAY);
 }
 
 void print_raw_sensor_data(uint16_t temp, uint16_t light) {
