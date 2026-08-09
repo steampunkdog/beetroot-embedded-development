@@ -37,6 +37,11 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 
+typedef enum {
+	TEMPERATURE_IDX = 0,
+	ILLUMUNANCE_IDX = 1
+} sensor_to_index_t;
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

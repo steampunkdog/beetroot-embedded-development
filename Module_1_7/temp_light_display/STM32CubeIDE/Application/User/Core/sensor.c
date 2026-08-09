@@ -13,13 +13,12 @@ static float calculate_temperature(uint16_t raw);
 static float calculate_illuminance(uint16_t raw);
 
 void get_calculated_sensor_values(uint16_t* raw, uint16_t* output) {
-	uint16_t temp_raw = raw[0];
-	uint16_t illum_raw = raw[1];
+	uint16_t temp_raw = raw[TEMPERATURE_IDX];
+	uint16_t illum_raw = raw[ILLUMUNANCE_IDX];
 	print_raw_sensor_data(temp_raw, illum_raw);
 
-	output[0] = calculate_temperature(temp_raw);
-	output[1] = calculate_illuminance(illum_raw);
-	print_processed_sensor_data(output[0], output[1]);
+	output[TEMPERATURE_IDX] = calculate_temperature(temp_raw);
+	output[ILLUMUNANCE_IDX] = calculate_illuminance(illum_raw);
 }
 
 static float calculate_temperature (uint16_t raw) {

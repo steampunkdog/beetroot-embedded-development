@@ -11,6 +11,6 @@
 
 void print_to_serial(const char * msg, ...);
 void print_raw_sensor_data(uint16_t temp, uint16_t light);
-void print_processed_sensor_data(float temp, float light);
+void print_processed_sensor_data(float* values)
 
 #endif /* APPLICATION_USER_CORE_INC_SERIAL_H_ */

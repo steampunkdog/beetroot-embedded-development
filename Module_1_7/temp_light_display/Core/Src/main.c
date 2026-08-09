@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "serial.h"
 #include "sensor.h"
+#include "display.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,23 +101,24 @@ int main(void)
   MX_I2C1_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-
   uint16_t raw[2];
   HAL_StatusTypeDef status = HAL_ADC_Start_DMA(&hadc1,(uint32_t *)raw, 2);
   print_to_serial("HAL_ADC_Start_DMA status: %d\n", status);
 
-  uint16_t out[2];
+  ssd1306_Init(&hi2c1);
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  float values[2];
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	get_calculated_sensor_values(raw, out);
+	get_calculated_sensor_values(raw, values);
+	print_processed_sensor_data(values);
+	draw_sensor_values(values);
 	HAL_Delay(1000);
   }
   /* USER CODE END 3 */
