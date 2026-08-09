@@ -14,7 +14,7 @@
 
 
 # Опис
-
+ПРОЕКТ: [temp_light_display](temp_light_display)
 ВІДЕО РОБОТИ: [https://youtu.be/yaor4GPJiNk](https://youtu.be/yaor4GPJiNk) 
 
 Плата кожні 1000мс знімає показники з фото- і терморезистора і розраховує значення відповідних величин. Отримані значення виводяться на екран та у Serial через USB-UART.
