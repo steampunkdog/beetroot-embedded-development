@@ -120,7 +120,6 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-
   while (adc_status || screen_status) {
 	  print_to_serial("Eval %d\r\n", adc_status || screen_status);
 	  print_to_serial("Encountered issue on init\r\n");

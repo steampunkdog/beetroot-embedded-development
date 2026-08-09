@@ -27,21 +27,16 @@ static float calculate_temperature (uint16_t raw) {
 	#define SHC_B 1.242576425e-4f
 	#define SHC_C 5.424282270e-7f
 
-//	print_to_serial("A: %f; B: %f; C: %f\r\n", SHC_A, SHC_B, SHC_C);
 	float r = TEMP_PULLDOWN_R * ((float)QUANTIZATION/raw - 1);
-//	print_to_serial("TEMP R: %f\r\n", r);
 	float t_K = 1.0 / (SHC_A + SHC_B*log(r) + SHC_C*pow(log(r), 3.0));
-//	print_to_serial("TEMP t_K: %f\r\n", t_K);
 	return t_K - 273.15;
 
 }
 
-#define LDR_SENSITIVITY 0.5f
-#define LDR_A 15811
-
 static float calculate_illuminance(uint16_t raw) {
+	#define LDR_SENSITIVITY 0.5f
+	#define LDR_A 15811
 	float r = LIGHT_PULLDOWN_R * ((float)QUANTIZATION/raw - 1);
-//	print_to_serial("ILLUM R: %f\r\n", r);
 	return pow(LDR_A/r, 1/LDR_SENSITIVITY);
 }
 
