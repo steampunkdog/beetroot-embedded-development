@@ -102,14 +102,23 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
   uint16_t raw[2];
-  HAL_StatusTypeDef status = HAL_ADC_Start_DMA(&hadc1,(uint32_t *)raw, 2);
-  print_to_serial("HAL_ADC_Start_DMA status: %d\n", status);
+  HAL_StatusTypeDef adc_status = HAL_ADC_Start_DMA(&hadc1,(uint32_t *)raw, 2);
 
-  ssd1306_Init(&hi2c1);
+  uint8_t screen_status = ssd1306_Init(&hi2c1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  if (adc_status | screen_status) {
+	  while (1) {
+		  print_to_serial("Encountered issue on init");
+		  print_to_serial("HAL_ADC_Start_DMA status: %d\n", adc_status);
+		  print_to_serial("SSD1306 Screen status: %d\n", adc_status);
+		  HAL_Delay(1000);
+	  }
+  }
+
   float values[2];
   while (1)
   {
