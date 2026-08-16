@@ -1,0 +1,217 @@
+I (281) measurement: -----------------------------------------
+I (281) measurement: Iteration 1
+I (281) measurement: Pin level set to 1, at 61168. Collecting input...
+I (1291) measurement: Time to first switch: 7621
+I (1291) measurement: State changed i: 0 at: 68789
+I (1291) measurement: State changed i: 1 at: 68807
+I (1291) measurement: State changed i: 2 at: 68823
+I (1291) measurement: State changed i: 3 at: 68880
+I (1301) measurement: State changed i: 4 at: 68923 
+I (1301) measurement: State changed i: 5 at: 69005
+I (1311) measurement: State changed i: 6 at: 69083
+I (1311) measurement: State changed i: 7 at: 69102
+I (1311) measurement: State changed i: 8 at: 69117
+I (1321) measurement: State changed i: 9 at: 70467
+I (1321) measurement: State changed i: 10 at: 70854
+I (1331) measurement: Time to stable state: 9686
+I (2331) measurement: -----------------------------------------
+I (2331) measurement: Iteration 2
+I (2331) measurement: Pin level set to 0, at 2104968. Collecting input...
+I (3331) measurement: Time to first switch: 1116
+I (3331) measurement: State changed i: 0 at: 2106084
+I (3331) measurement: Time to stable state: 1116
+I (4331) measurement: -----------------------------------------
+I (4331) measurement: Iteration 3
+I (4331) measurement: Pin level set to 1, at 4104966. Collecting input...
+I (5331) measurement: Time to first switch: 7606
+I (5331) measurement: State changed i: 0 at: 4112572
+I (5331) measurement: State changed i: 1 at: 4112594
+I (5331) measurement: State changed i: 2 at: 4112601
+I (5331) measurement: State changed i: 3 at: 4112607
+I (5341) measurement: State changed i: 4 at: 4112669
+I (5341) measurement: State changed i: 5 at: 4112700
+I (5351) measurement: State changed i: 6 at: 4112707
+I (5351) measurement: State changed i: 7 at: 4112789
+I (5361) measurement: State changed i: 8 at: 4112866
+I (5361) measurement: State changed i: 9 at: 4112892
+I (5371) measurement: State changed i: 10 at: 4112902
+I (5371) measurement: State changed i: 11 at: 4114264
+I (5371) measurement: State changed i: 12 at: 4114642
+I (5381) measurement: Time to stable state: 9676
+I (6381) measurement: -----------------------------------------
+I (6381) measurement: Iteration 4
+I (6381) measurement: Pin level set to 0, at 6154966. Collecting input...
+I (7381) measurement: Time to first switch: 1112
+I (7381) measurement: State changed i: 0 at: 6156078
+I (7381) measurement: Time to stable state: 1112
+I (8381) measurement: -----------------------------------------
+I (8381) measurement: Iteration 5
+I (8381) measurement: Pin level set to 1, at 8154966. Collecting input...
+I (9381) measurement: Time to first switch: 7596
+I (9381) measurement: State changed i: 0 at: 8162562
+I (9381) measurement: State changed i: 1 at: 8162578
+I (9381) measurement: State changed i: 2 at: 8162582
+I (9381) measurement: State changed i: 3 at: 8162597
+I (9391) measurement: State changed i: 4 at: 8162655
+I (9391) measurement: State changed i: 5 at: 8162665
+I (9401) measurement: State changed i: 6 at: 8162697
+I (9401) measurement: State changed i: 7 at: 8162783
+I (9411) measurement: State changed i: 8 at: 8162850
+I (9411) measurement: State changed i: 9 at: 8162854
+I (9421) measurement: State changed i: 10 at: 8162875
+I (9421) measurement: State changed i: 11 at: 8162893
+I (9421) measurement: State changed i: 12 at: 8164228
+I (9431) measurement: State changed i: 13 at: 8164231
+I (9431) measurement: State changed i: 14 at: 8164238
+I (9441) measurement: State changed i: 15 at: 8164630
+I (9441) measurement: Time to stable state: 9664
+I (10451) measurement: -----------------------------------------
+I (10451) measurement: Iteration 6
+I (10451) measurement: Pin level set to 0, at 10224969. Collecting input...
+I (11451) measurement: Time to first switch: 1110
+I (11451) measurement: State changed i: 0 at: 10226079
+I (11451) measurement: Time to stable state: 1110
+I (12451) measurement: -----------------------------------------
+I (12451) measurement: Iteration 7
+I (12451) measurement: Pin level set to 1, at 12224969. Collecting input...
+I (13451) measurement: Time to first switch: 7614
+I (13451) measurement: State changed i: 0 at: 12232583
+I (13451) measurement: State changed i: 1 at: 12232608
+I (13451) measurement: State changed i: 2 at: 12232619
+I (13451) measurement: State changed i: 3 at: 12232684
+I (13461) measurement: State changed i: 4 at: 12232686
+I (13461) measurement: State changed i: 5 at: 12232698
+I (13471) measurement: State changed i: 6 at: 12232703
+I (13471) measurement: State changed i: 7 at: 12232705
+I (13481) measurement: State changed i: 8 at: 12232707
+I (13481) measurement: State changed i: 9 at: 12232712
+I (13491) measurement: State changed i: 10 at: 12232802
+I (13491) measurement: State changed i: 11 at: 12232877
+I (13501) measurement: State changed i: 12 at: 12232897
+I (13501) measurement: State changed i: 13 at: 12234279
+I (13511) measurement: State changed i: 14 at: 12234654
+I (13511) measurement: Time to stable state: 9685
+I (14521) measurement: -----------------------------------------
+I (14521) measurement: Iteration 8
+I (14521) measurement: Pin level set to 0, at 14294969. Collecting input...
+I (15521) measurement: Time to first switch: 1108
+I (15521) measurement: State changed i: 0 at: 14296077
+I (15521) measurement: State changed i: 1 at: 14296079
+I (15521) measurement: Time to stable state: 1110
+I (16521) measurement: -----------------------------------------
+I (16521) measurement: Iteration 9
+I (16521) measurement: Pin level set to 1, at 16294969. Collecting input...
+I (17521) measurement: Time to first switch: 7637
+I (17521) measurement: State changed i: 0 at: 16302606
+I (17521) measurement: State changed i: 1 at: 16302630
+I (17521) measurement: State changed i: 2 at: 16302641
+I (17521) measurement: State changed i: 3 at: 16302699
+I (17531) measurement: State changed i: 4 at: 16302734
+I (17531) measurement: State changed i: 5 at: 16302741
+I (17541) measurement: State changed i: 6 at: 16302822
+I (17541) measurement: State changed i: 7 at: 16302900
+I (17551) measurement: State changed i: 8 at: 16302917
+I (17551) measurement: State changed i: 9 at: 16302937
+I (17561) measurement: State changed i: 10 at: 16304273
+I (17561) measurement: State changed i: 11 at: 16304682
+I (17571) measurement: Time to stable state: 9713
+I (18571) measurement: -----------------------------------------
+I (18571) measurement: Iteration 10
+I (18571) measurement: Pin level set to 0, at 18344971. Collecting input...
+I (19571) measurement: Time to first switch: 1108
+I (19571) measurement: State changed i: 0 at: 18346079
+I (19571) measurement: Time to stable state: 1108
+I (20571) measurement: -----------------------------------------
+I (20571) measurement: Iteration 11
+I (20571) measurement: Pin level set to 1, at 20344971. Collecting input...
+I (21571) measurement: Time to first switch: 7650
+I (21571) measurement: State changed i: 0 at: 20352621
+I (21571) measurement: State changed i: 1 at: 20352647
+I (21571) measurement: State changed i: 2 at: 20352649
+I (21571) measurement: State changed i: 3 at: 20352656
+I (21581) measurement: State changed i: 4 at: 20352725
+I (21581) measurement: State changed i: 5 at: 20352755
+I (21591) measurement: State changed i: 6 at: 20352838
+I (21591) measurement: State changed i: 7 at: 20352915
+I (21601) measurement: State changed i: 8 at: 20352944
+I (21601) measurement: State changed i: 9 at: 20352952
+I (21611) measurement: State changed i: 10 at: 20354286
+I (21611) measurement: State changed i: 11 at: 20354297
+I (21621) measurement: State changed i: 12 at: 20354299
+I (21621) measurement: State changed i: 13 at: 20354304
+I (21631) measurement: State changed i: 14 at: 20354312
+I (21631) measurement: State changed i: 15 at: 20354314
+I (21641) measurement: State changed i: 16 at: 20354697
+I (21641) measurement: Time to stable state: 9726
+I (22651) measurement: -----------------------------------------
+I (22651) measurement: Iteration 12
+I (22651) measurement: Pin level set to 0, at 22424971. Collecting input...
+I (23651) measurement: Time to first switch: 1102
+I (23651) measurement: State changed i: 0 at: 22426073
+I (23651) measurement: Time to stable state: 1102
+I (24651) measurement: -----------------------------------------
+I (24651) measurement: Iteration 13
+I (24651) measurement: Pin level set to 1, at 24424971. Collecting input...
+I (25651) measurement: Time to first switch: 7648
+I (25651) measurement: State changed i: 0 at: 24432619
+I (25651) measurement: State changed i: 1 at: 24432639
+I (25651) measurement: State changed i: 2 at: 24432654
+I (25651) measurement: State changed i: 3 at: 24432719
+I (25661) measurement: State changed i: 4 at: 24432754
+I (25661) measurement: State changed i: 5 at: 24432836
+I (25671) measurement: State changed i: 6 at: 24432912
+I (25671) measurement: State changed i: 7 at: 24432938
+I (25681) measurement: State changed i: 8 at: 24432940
+I (25681) measurement: State changed i: 9 at: 24434283
+I (25691) measurement: State changed i: 10 at: 24434701
+I (25691) measurement: Time to stable state: 9730
+I (26701) measurement: -----------------------------------------
+I (26701) measurement: Iteration 14
+I (26701) measurement: Pin level set to 0, at 26474971. Collecting input...
+I (27701) measurement: Time to first switch: 1102
+I (27701) measurement: State changed i: 0 at: 26476073
+I (27701) measurement: Time to stable state: 1102
+I (28701) measurement: -----------------------------------------
+I (28701) measurement: Iteration 15
+I (28701) measurement: Pin level set to 1, at 28474971. Collecting input...
+I (29701) measurement: Time to first switch: 7663
+I (29701) measurement: State changed i: 0 at: 28482634
+I (29701) measurement: State changed i: 1 at: 28482656
+I (29701) measurement: State changed i: 2 at: 28482663
+I (29701) measurement: State changed i: 3 at: 28482665
+I (29711) measurement: State changed i: 4 at: 28482668
+I (29711) measurement: State changed i: 5 at: 28482731
+I (29721) measurement: State changed i: 6 at: 28482770
+I (29721) measurement: State changed i: 7 at: 28482852
+I (29731) measurement: State changed i: 8 at: 28482928
+I (29731) measurement: State changed i: 9 at: 28484293
+I (29741) measurement: State changed i: 10 at: 28484324
+I (29741) measurement: State changed i: 11 at: 28484350
+I (29751) measurement: State changed i: 12 at: 28484712
+I (29751) measurement: Time to stable state: 9741
+I (30761) measurement: -----------------------------------------
+I (30761) measurement: Iteration 16
+I (30761) measurement: Pin level set to 0, at 30534971. Collecting input...
+I (31761) measurement: Time to first switch: 1099
+I (31761) measurement: State changed i: 0 at: 30536070
+I (31761) measurement: Time to stable state: 1099
+I (32761) measurement: -----------------------------------------
+I (32761) measurement: Iteration 17
+I (32761) measurement: Pin level set to 1, at 32534971. Collecting input...
+I (33761) measurement: Time to first switch: 7686
+I (33761) measurement: State changed i: 0 at: 32542657
+I (33761) measurement: State changed i: 1 at: 32542675
+I (33761) measurement: State changed i: 2 at: 32542692
+I (33761) measurement: State changed i: 3 at: 32542749
+I (33771) measurement: State changed i: 4 at: 32542757
+I (33771) measurement: State changed i: 5 at: 32542785
+I (33781) measurement: State changed i: 6 at: 32542875
+I (33781) measurement: State changed i: 7 at: 32542950
+I (33791) measurement: State changed i: 8 at: 32542972
+I (33791) measurement: State changed i: 9 at: 32542983
+I (33801) measurement: State changed i: 10 at: 32542985
+I (33801) measurement: State changed i: 11 at: 32542987
+I (33811) measurement: State changed i: 12 at: 32544327
+I (33811) measurement: State changed i: 13 at: 32544741
+I (33821) measurement: Time to stable state: 9770
+I (34821) measurement: -----------------------------------------
