@@ -62,6 +62,7 @@ void app_main() {
     }
 }
 
+// Configure ADC on pin 1
 void adc_init() {
     adc_oneshot_unit_init_cfg_t adc_conf = {
         .unit_id = ADC_UNIT_1,
@@ -79,6 +80,7 @@ void adc_init() {
     ESP_ERROR_CHECK(adc_oneshot_config_channel(adc_handle, POTENTIOMETER_CHANNEL, &adc_chan_conf));
 }
 
+// Configure 25kHz PWM on pin 38
 void pwm_init() {
     mcpwm_timer_handle_t pwm_timer_handle;
     mcpwm_oper_handle_t pwm_operator_handle;
