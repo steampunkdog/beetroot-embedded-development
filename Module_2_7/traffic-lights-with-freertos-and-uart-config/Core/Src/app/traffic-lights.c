@@ -77,9 +77,7 @@ typedef struct {
 	TickType_t phase_started;
 	size_t phase_idx;
 	phase_t phase;
-	TickType_t phase_duration;
 	int number_of_blinks;
-	TickType_t blinking_period;
 
 	command_types last_command;
 } traffic_lights_task_state_t;
@@ -90,21 +88,18 @@ static void reset_traffic_lights_task_state(phase_t* phases, size_t number_of_ph
 	cts.phases = phases;
 	cts.number_of_phases = number_of_phases;
 
-	cts.phase_started = xTaskGetTickCount();
 	cts.phase_idx = 0;
-	cts.phase = regular_mode_phases[cts.phase_idx];
-	cts.phase_duration = cts.phase.duration_ticks;
-
+	cts.phase_started = xTaskGetTickCount();
+	cts.phase = cts.phases[cts.phase_idx];
 	cts.number_of_blinks = 0;
-	cts.blinking_period = cts.phase.period_ticks;
 
 	// to avoid writing init logic in cycle
 	set_active_pins(cts.phase.pin_bit_mask);
-
-	cts.last_command = COMMAND_NONE;
 }
 
 void traffic_lights_task(void *params) {
+	cts.last_command = COMMAND_NONE;
+
 	while (1) {
 		// handle incoming command
 		uint32_t notification = ulTaskNotifyTake(pdTRUE, 0);
@@ -112,16 +107,18 @@ void traffic_lights_task(void *params) {
 			if (cts.last_command == notification) {
 				log_to_serial("Already in requested state \r\n");
 			} else if (notification == COMMAND_RUN) {
-				log_to_serial("Running \r\n");
 				reset_traffic_lights_task_state(regular_mode_phases, sizeof(regular_mode_phases)/sizeof(phase_t));
+				log_to_serial("Running \r\n");
 			} else if (notification == COMMAND_FLASHING_YELLOW) {
-				log_to_serial("Flashing Yellow \r\n");
 				reset_traffic_lights_task_state(&flasing_yellow_phase, 1);
+				log_to_serial("Flashing Yellow \r\n");
 			} else if (notification == COMMAND_STOP) {
 				// Do nothing, while waiting for next state change
+				set_active_pins(0);
 				log_to_serial("Stopped \r\n");
 			} else if (notification == COMMAND_CONFIG) {
 				// Do nothing, while waiting for next state change
+				set_active_pins(0);
 				log_to_serial("Configuration \r\n");
 			}
 			cts.last_command = notification;
@@ -132,14 +129,12 @@ void traffic_lights_task(void *params) {
 			TickType_t now = xTaskGetTickCount();
 			if (now - cts.phase_started >= cts.phase.duration_ticks) {
 				cts.phase_idx = (cts.phase_idx + 1) % cts.number_of_phases;
-				cts.phase = regular_mode_phases[cts.phase_idx];
-				cts.phase_started = xTaskGetTickCount();
-				cts.phase_duration = cts.phase.duration_ticks;
-				cts.blinking_period = cts.phase.period_ticks;
+				cts.phase = cts.phases[cts.phase_idx];
+				cts.phase_started = xTaskGetTickCount();\
 				cts.number_of_blinks = 0;
 
 				set_active_pins(cts.phase.pin_bit_mask);
-			} else if (cts.blinking_period != 0 && (now - cts.phase_started) / cts.blinking_period > cts.number_of_blinks) {
+			} else if (cts.phase.period_ticks != 0 && (now - cts.phase_started) / cts.phase.period_ticks > cts.number_of_blinks) {
 				toggle_pins_state(cts.phase.pin_bit_mask);
 				cts.number_of_blinks++;
 			}
@@ -148,7 +143,7 @@ void traffic_lights_task(void *params) {
 		// Flashing Yellow logic
 		if (cts.last_command == COMMAND_FLASHING_YELLOW) {
 			TickType_t now = xTaskGetTickCount();
-			if (cts.blinking_period != 0 && (now - cts.phase_started) / cts.blinking_period > cts.number_of_blinks)  {
+			if ((now - cts.phase_started) / cts.phase.period_ticks > cts.number_of_blinks)  {
 				toggle_pins_state(cts.phase.pin_bit_mask);
 				cts.number_of_blinks++;
 			}

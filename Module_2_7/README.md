@@ -1,11 +1,13 @@
 # Проєкт "Світлофор": STM32 + FreeRTOS + UART + Python GUI
 
+ВІДЕО РОБОТИ: [https://youtube.com/shorts/2TTs6l9UEJQ?si=XaHqgusTIA8MFGAS](https://youtube.com/shorts/2TTs6l9UEJQ?si=XaHqgusTIA8MFGAS)
+
 ## Короткий опис проєкту
 
 Цей проєкт складається з двох пов'язаних частин:
 
-- `traffic-lights-with-freertos-and-uart-config` - прошивка, яка реалізує логіку світлофора, приймає команди через UART і керує світлодіодами.
-- `traffic-lights-companion-app` - Python-застосунок з GUI, через який можна запускати, зупиняти, переводити світлофор у режим миготливого жовтого та змінювати часові параметри фаз.
+- [traffic-lights-with-freertos-and-uart-config](traffic-lights-with-freertos-and-uart-config) - прошивка, яка реалізує логіку світлофора, приймає команди через UART і керує світлодіодами.
+- [traffic-lights-companion-app](traffic-lights-companion-app) - Python-застосунок з GUI, через який можна запускати, зупиняти, переводити світлофор у режим миготливого жовтого та змінювати часові параметри фаз.
 
 На прикладному рівні система працює так: GUI формує бінарну команду, надсилає її через serial, прошивка приймає її, перетворює у внутрішню структуру і передає в задачу, що керує режимом роботи світлофора.
 

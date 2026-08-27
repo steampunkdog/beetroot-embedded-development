@@ -14,13 +14,13 @@ class AppWindow(ctk.CTk):
 		("Configure", 4),
 	]
 	config_parameters = [
-		("Green duration (ms)", "green_ms", 5000),
+		("Green duration (ms)", "green_ms", 3000),
 		("Green flashing duration (ms)", "green_flashing_ms", 1000),
-		("Green flashing period (ms)", "green_flashing_period", 200),
+		("Green flashing period (ms)", "green_flashing_period", 100),
 		("Yellow duration (ms)", "yellow_ms", 2000),
-		("Red duration (ms)", "red_ms", 5000),
+		("Red duration (ms)", "red_ms", 3000),
 		("Red + yellow duration (ms)", "red_and_yellow_ms", 1000),
-		("Yellow flashing period (ms)", "flashing_yellow_period", 200),
+		("Yellow flashing period (ms)", "flashing_yellow_period", 100),
 	]
 
 	buttons = {}
@@ -54,8 +54,8 @@ class AppWindow(ctk.CTk):
 		self.logTextbox = ctk.CTkTextbox(self, wrap="word")
 		self.logTextbox.grid(row=9, column=0, padx=20, pady=5, sticky="ew", columnspan=2)
 
-		# self.ser = serial.Serial('/dev/ttyUSB0', 115200)
-		self.ser = {}
+		self.ser = serial.Serial('/dev/ttyUSB0', 115200)
+		# self.ser = {}
 
 		thread = threading.Thread(target=self.read_serial)
 		thread.start()
@@ -80,7 +80,6 @@ class AppWindow(ctk.CTk):
 
 	def read_serial(self):
 		while True:
-			sleep(1000000)
 			data = self.ser.readline()
 			self.append_text("COM: " + data.decode("ascii"))
 
